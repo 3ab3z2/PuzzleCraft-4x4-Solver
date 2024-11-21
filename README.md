@@ -74,7 +74,10 @@ Future Enhancements
 ## Authors
 
 - [@3ab3z2](https://www.github.com/3ab3z2)
-
-
-
+- [@mr-revoo](https://www.github.com/mr-revoo)
+- [@Omar-Mega-Byte](https://www.github.com/Omar-Mega-Byte)
+- [@Omar3wwad](https://www.github.com/Omar3wwad)
+- [@Sugarsai](https://www.github.com/Sugarsai)
+- [@aligomaa3](https://www.github.com/aligomaa3)
+  
 ---
