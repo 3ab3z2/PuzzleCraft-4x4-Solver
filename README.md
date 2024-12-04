@@ -1,83 +1,68 @@
-# Make a Square Puzzle Solver
+# Make A Square Game
 
-## Description
-This project solves a 4x4 puzzle using 4 or 5 pieces with rotation and flipping. The program is implemented in **Java** with a real-time GUI for input/output and uses multithreading to explore possible solutions efficiently.
+## Overview
+Make A Square Game is a puzzle game inspired by Tetris, where the objective is to fit various pieces into a 4x4 grid without any gaps. The game allows for automatic rotation and flipping of pieces to achieve the perfect square formation.
 
 ## Features
-- Input:
-  - Define pieces using dimensions and grid representation.
-  - Specify the number of pieces (4 or 5).
-- Output:
-  - Display all possible solutions for the puzzle.
-  - Indicate if no solution exists.
-- Multithreading for efficient problem solving.
-- Real-time GUI for visualizing progress.
-
-## Requirements
-- Java 17 or higher
-- JavaFX for GUI
-
-## How It Works
-1. The user specifies the puzzle pieces and their configurations.
-2. The program spawns threads to test all possible placements and rotations.
-3. Results are displayed in real-time on the GUI.
+- User-friendly GUI built with JavaFX.
+- Supports multiple game pieces with different shapes.
+- Efficient solving algorithm utilizing multithreading for performance.
+- Visual feedback for piece placement and grid status.
 
 ## Project Structure
 ```
-src/
-├── Main.java          // Entry point
-├── gui/
-│   ├── MainView.java  // GUI layout
-│   ├── BoardView.java // Visual representation of the board
-├── models/
-│   ├── Piece.java     // Represents a piece
-│   ├── Board.java     // Manages the board
-├── solver/
-│   ├── Solver.java    // Core solving logic
-│   ├── TaskWorker.java // Individual thread tasks
-└── utils/
-    ├── FileHandler.java // Reading/writing configurations
-    ├── Logger.java      // Logging thread activities
+Make_A_Square_Game
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── example
+│   │   │           └── make_a_square_gui
+│   │   │               ├── Board.java
+│   │   │               ├── HelloController.java
+│   │   │               ├── MakeASquare.java
+│   │   │               ├── Paralleling.java
+│   │   │               ├── Piece.java
+│   │   │               ├── PiecesModel.java
+│   │   │               └── constants.java
+│   │   └── resources
+│   │       └── com
+│   │           └── example
+│   │               └── make_a_square_gui
+│   │                   └── hello-view.fxml
+├── .vscode
+│   ├── launch.json
+│   ├── settings.json
+│   └── tasks.json
+├── .gitignore
+├── pom.xml
+├── README.md
+└── docs
+    ├── INSTALLATION.md
+    └── USAGE.md
 ```
 
-## Running the Project
-1. Clone the repository.
-2. Open the project in your favorite IDE.
-3. Ensure JavaFX is configured in your build path.
-4. Run `Main.java`.
+## Installation
+1. Clone the repository:
+   ```
+   git clone https://github.com/3ab3z2/PuzzleCraft-4x4-Solver.git
+   ```
+2. Navigate to the project directory:
+   ```
+   cd Make_A_Square_Game
+   ```
+3. Ensure you have Maven installed. If not, download and install it from [Maven's official website](https://maven.apache.org/download.cgi).
+4. Build the project using Maven:
+   ```
+   mvn clean install
+   ```
 
-## Examples
-### Input:
-```plaintext
-4
-2 3
-111
-101
-3 2
-11
-10
-10
-```
-Output:
-```
-1112
-1412
-3422
-3442
-```
-Future Enhancements
+## Usage
+1. Run the application:
+   ```
+   mvn javafx:run
+   ```
+2. Follow the on-screen instructions to input the number of each piece type and start solving the puzzle.
 
-    Add drag-and-drop functionality for piece placement.
-    Extend support for larger grids.
-
-
-## Authors
-
-- [@3ab3z2](https://www.github.com/3ab3z2)
-- [@mr-revoo](https://www.github.com/mr-revoo)
-- [@Omar-Mega-Byte](https://www.github.com/Omar-Mega-Byte)
-- [@Omar3wwad](https://www.github.com/Omar3wwad)
-- [@Sugarsai](https://www.github.com/Sugarsai)
-- [@aligomaa3](https://www.github.com/aligomaa3)
-  
----
+## License
+This project is licensed under the MIT License. See the LICENSE file for more details.

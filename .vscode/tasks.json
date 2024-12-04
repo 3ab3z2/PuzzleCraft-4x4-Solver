@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "mvn",
+            "args": [
+                "clean",
+                "package"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$javac"
+            ]
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "mvn",
+            "args": [
+                "exec:java",
+                "-Dexec.mainClass=com.example.make_a_square_gui.MakeASquare"
+            ],
+            "group": "test",
+            "dependsOn": "build",
+            "problemMatcher": [
+                "$javac"
+            ]
+        }
+    ]
+}

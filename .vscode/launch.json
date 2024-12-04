@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch MakeASquare",
+            "request": "launch",
+            "mainClass": "com.example.make_a_square_gui.MakeASquare",
+            "projectName": "Make_A_Square_Game"
+        }
+    ]
+}
