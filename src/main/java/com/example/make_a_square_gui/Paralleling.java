@@ -5,43 +5,43 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Paralleling implements Runnable {
     private final ReentrantLock lock;
-    private static volatile boolean foundBoard = false;
-    private static int[][] finallyBoard;
+    public static volatile boolean foundBoard = false;
+    public static int[][] finallyBoard; // Shared final solution
     private final Map<Integer, int[][]> allPieces;
+    private final int threadID;
+    private final int sectionSize; // Number of masks each thread processes
 
-    public Paralleling(Map<Integer, int[][]> allPieces) {
+    public Paralleling(Map<Integer, int[][]> allPieces, int threadID, int sectionSize) {
         this.lock = new ReentrantLock();
         this.allPieces = allPieces;
+        this.threadID = threadID;
+        this.sectionSize = sectionSize;
     }
 
     @Override
     public void run() {
-        int[][] finalBoard;
-        int threadID = Integer.parseInt(Thread.currentThread().getName());
-
-        int from = threadID * 1000; // Assuming constants.sectionSize = 1000
-        int to = Math.min(from + 999, 9999); // Assuming constants.numberOfBoards = 10000
-        if (threadID == 9) { // Assuming constants.numberOfThreads = 10
-            to = 9999;
-        }
+        int from = threadID * sectionSize;
+        int to = from + sectionSize - 1;
 
         for (int mask = from; mask <= to; mask++) {
-            Board slaveBoard = new Board(allPieces);
-//            finalBoard = slaveBoard.decompose(mask);
-
             if (foundBoard) {
                 break;
             }
 
-//            if (finalBoard != null) {
-//                lock.lock();
-//                try {
-//                    foundBoard = true;
-//                    finallyBoard = finalBoard;
-//                } finally {
-//                    lock.unlock();
-//                }
-//            }
+            Board slaveBoard = new Board(allPieces);
+            int[][] possibleSolution = slaveBoard.decompose(mask);
+
+            if (possibleSolution != null) {
+                lock.lock();
+                try {
+                    if (!foundBoard) { // Double-check condition after locking
+                        foundBoard = true;
+                        finallyBoard = possibleSolution;
+                    }
+                } finally {
+                    lock.unlock();
+                }
+            }
         }
     }
 }

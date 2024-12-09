@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -78,7 +79,53 @@ public class Controller implements Initializable {
 
     private void solveProblem() {
         setHashMap();
-        System.out.println("Values in the HashMap:");
-        hashMap.forEach((key, value) -> System.out.println(key + ": " + value));
+        PiecesModel piecesModel = new PiecesModel();
+        Map<Integer, int[][]> pieces = new HashMap<>();
+
+        // Map pieces
+        hashMap.forEach((key, value) -> {
+            int[][] basePiece = piecesModel.retrievePiece(key);
+            for (int i = 0; i < value; i++) {
+                pieces.put(pieces.size(), basePiece);
+            }
+        });
+
+        int numberOfThreads = 10;
+        int sectionSize = 10000 / numberOfThreads;
+        Thread[] threads = new Thread[numberOfThreads];
+
+        for (int i = 0; i < numberOfThreads; i++) {
+            threads[i] = new Thread(new Paralleling(pieces, i, sectionSize), String.valueOf(i));
+            threads[i].start();
+        }
+
+        // Join threads
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Update GUI
+        if (Paralleling.foundBoard) {
+            updateGUI(Paralleling.finallyBoard);
+        } else {
+            System.out.println("No solution found!");
+        }
     }
+
+
+    private void updateGUI(int[][] solvedBoard) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                String buttonText = solvedBoard[i][j] == 0 ? "" : String.valueOf(solvedBoard[i][j]);
+                array2DButton[i][j].setText(buttonText);
+                array2DButton[i][j].setStyle(solvedBoard[i][j] == 0 ? "-fx-background-color: white;" : "-fx-background-color: lightgreen;");
+            }
+        }
+    }
+
+
 }

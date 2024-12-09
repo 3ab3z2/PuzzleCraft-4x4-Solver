@@ -68,23 +68,35 @@ public class Board {
     public int[][] decompose(int mask) {
         int[][] copyGrid = new int[sizeX][sizeY];
         setGrid(copyGrid);
+
         for (int i = 0; i < 4; i++) {
             int pieceIndex = (mask >> (i * 4)) & 15;
             int[][] piece = pieces.get(pieceIndex);
-            for (int row = 0; row < sizeX; row++) {
-                for (int col = 0; col < sizeY; col++) {
-                    if (canPlacePiece(copyGrid, piece, row, col)) {
-                        placePiece(copyGrid, piece, row, col);
-                        if (isValidBoard(copyGrid)) {
-                            return copyGrid;
+
+            Piece pieceObject = new Piece(piece);
+            for (int rotation = 0; rotation < 4; rotation++) {
+                int[][] rotatedPiece = pieceObject.rotate();
+                for (boolean flip : new boolean[]{false, true}) {
+                    int[][] currentPiece = flip ? new Piece(rotatedPiece).flip() : rotatedPiece;
+                    for (int row = 0; row < sizeX; row++) {
+                        for (int col = 0; col < sizeY; col++) {
+                            if (canPlacePiece(copyGrid, currentPiece, row, col)) {
+                                placePiece(copyGrid, currentPiece, row, col);
+                                if (isValidBoard(copyGrid)) {
+                                    return copyGrid;
+                                }
+                                removePiece(copyGrid, currentPiece, row, col);
+                            }
                         }
-                        removePiece(copyGrid, piece, row, col);
                     }
                 }
             }
         }
         return null;
     }
+
+
+
 
     @Override
     public String toString() {
