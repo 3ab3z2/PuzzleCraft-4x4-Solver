@@ -31,6 +31,10 @@ public class Piece {
         return flipped;
     }
 
+    public int[][] getPiece() {
+        return piece;
+    }
+
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder();

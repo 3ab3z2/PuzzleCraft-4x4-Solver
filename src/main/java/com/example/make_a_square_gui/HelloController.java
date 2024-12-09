@@ -1,9 +1,9 @@
 package com.example.make_a_square_gui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -36,23 +36,15 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        piecesModel = new PiecesModel();
-        initButtons();
+        // Initialize the controller
     }
 
     private void initButtons() {
-        array2DButton = new Button[4][4];
         // Initialize the buttons
     }
 
     private void setHashMap() {
-        hashMap.put('L', Integer.parseInt(textL.getText()));
-        hashMap.put('Z', Integer.parseInt(textZ.getText()));
-        hashMap.put('I', Integer.parseInt(textI.getText()));
-        hashMap.put('J', Integer.parseInt(textJ.getText()));
-        hashMap.put('T', Integer.parseInt(textT.getText()));
-        hashMap.put('S', Integer.parseInt(textS.getText()));
-        hashMap.put('O', Integer.parseInt(textO.getText()));
+        // Set the hash map with piece counts
     }
 
     public void solveProblem() {
@@ -86,16 +78,6 @@ public class HelloController implements Initializable {
     }
 
     private void paintButton() {
-        ArrayList<String> arrColor = new ArrayList<>();
-        arrColor.add("-fx-background-color: green;");
-        arrColor.add("-fx-background-color: red;");
-        arrColor.add("-fx-background-color: aqua;");
-        arrColor.add("-fx-background-color: yellow;");
-        arrColor.add("-fx-background-color: purple;");
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                array2DButton[i][j].setStyle(arrColor.get(finalBoard[i][j]));
-            }
-        }
+        // Paint the buttons to show the solution
     }
 }

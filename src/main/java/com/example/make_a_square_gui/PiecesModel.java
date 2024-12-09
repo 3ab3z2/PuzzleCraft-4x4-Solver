@@ -1,21 +1,17 @@
 package com.example.make_a_square_gui;
 
 public class PiecesModel {
-    private int id;
-    private int[][] matrix;
-    private int count;
-    private String textField;
-    private static int[][][] pieces;
+    private int[][][] pieces;
 
     public PiecesModel() {
         pieces = new int[7][][];
-        pieces[0] = new int[][]{{1, 0}, {1, 0}, {1, 1}};
-        pieces[1] = new int[][]{{1, 1, 0}, {0, 1, 1}};
-        pieces[2] = new int[][]{{1}, {1}, {1}, {1}};
-        pieces[3] = new int[][]{{0, 1}, {0, 1}, {1, 1}};
-        pieces[4] = new int[][]{{1, 1, 1}, {0, 1, 0}, {0, 1, 0}};
-        pieces[5] = new int[][]{{0, 1, 1}, {0, 1, 0}, {1, 1, 0}};
-        pieces[6] = new int[][]{{1, 1}, {1, 1}};
+        pieces[0] = new int[][]{{1, 0}, {1, 0}, {1, 1}}; // L
+        pieces[1] = new int[][]{{1, 1, 0}, {0, 1, 1}}; // Z
+        pieces[2] = new int[][]{{1}, {1}, {1}, {1}}; // I
+        pieces[3] = new int[][]{{0, 1}, {0, 1}, {1, 1}}; // J
+        pieces[4] = new int[][]{{1, 1, 1}, {0, 1, 0}, {0, 1, 0}}; // T
+        pieces[5] = new int[][]{{0, 1, 1}, {0, 1, 0}, {1, 1, 0}}; // S
+        pieces[6] = new int[][]{{1, 1}, {1, 1}}; // O
     }
 
     public int[][] retrievePiece(Character character) {
