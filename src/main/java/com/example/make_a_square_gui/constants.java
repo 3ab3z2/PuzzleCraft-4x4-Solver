@@ -1,3 +1,5 @@
+package com.example.make_a_square_gui;
+
 public interface constants {
     int gridRows = 4;
     int gridCols = 4;

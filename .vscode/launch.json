@@ -6,7 +6,8 @@
             "name": "Launch MakeASquare",
             "request": "launch",
             "mainClass": "com.example.make_a_square_gui.MakeASquare",
-            "projectName": "Make_A_Square_Game"
+            "projectName": "Make_A_Square_Game",
+            "vmArgs": "--module-path /usr/lib/jvm/java-23-openjdk/lib --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }

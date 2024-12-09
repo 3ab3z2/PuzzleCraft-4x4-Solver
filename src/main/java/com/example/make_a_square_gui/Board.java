@@ -65,6 +65,27 @@ public class Board {
         }
     }
 
+    public int[][] decompose(int mask) {
+        int[][] copyGrid = new int[sizeX][sizeY];
+        setGrid(copyGrid);
+        for (int i = 0; i < 4; i++) {
+            int pieceIndex = (mask >> (i * 4)) & 15;
+            int[][] piece = pieces.get(pieceIndex);
+            for (int row = 0; row < sizeX; row++) {
+                for (int col = 0; col < sizeY; col++) {
+                    if (canPlacePiece(copyGrid, piece, row, col)) {
+                        placePiece(copyGrid, piece, row, col);
+                        if (isValidBoard(copyGrid)) {
+                            return copyGrid;
+                        }
+                        removePiece(copyGrid, piece, row, col);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder();
