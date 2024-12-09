@@ -27,21 +27,21 @@ public class Paralleling implements Runnable {
 
         for (int mask = from; mask <= to; mask++) {
             Board slaveBoard = new Board(allPieces);
-            finalBoard = slaveBoard.decompose(mask);
+//            finalBoard = slaveBoard.decompose(mask);
 
             if (foundBoard) {
                 break;
             }
 
-            if (finalBoard != null) {
-                lock.lock();
-                try {
-                    foundBoard = true;
-                    finallyBoard = finalBoard;
-                } finally {
-                    lock.unlock();
-                }
-            }
+//            if (finalBoard != null) {
+//                lock.lock();
+//                try {
+//                    foundBoard = true;
+//                    finallyBoard = finalBoard;
+//                } finally {
+//                    lock.unlock();
+//                }
+//            }
         }
     }
 }
