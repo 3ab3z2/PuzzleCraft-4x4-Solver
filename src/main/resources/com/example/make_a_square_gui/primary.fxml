@@ -15,7 +15,7 @@
 
     <children>
         <!--onAction="#solveButton"-->
-        <Button fx:id="solveButton" defaultButton="true" layoutX="42.0" layoutY="518.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: blue;" text="Solve" textFill="#ecee00">
+        <Button fx:id="solveButton" defaultButton="true" layoutX="43.0" layoutY="575.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="89.0" style="-fx-background-color: grey;" text="Solve" textFill="#ecee00">
             <font>
                 <Font name="Bebas Neue Regular" size="21.0" />
             </font>
@@ -55,7 +55,7 @@
             <Button fx:id="button3x3" mnemonicParsing="false" prefHeight="139.0" prefWidth="147.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
          </children>
         </GridPane>
-        <Label contentDisplay="CENTER" layoutY="274.0" prefHeight="34.0" prefWidth="67.0" text="   T">
+        <Label contentDisplay="CENTER" layoutY="357.0" prefHeight="34.0" prefWidth="67.0" text="   T">
             <font>
                 <Font size="33.0" />
             </font>
@@ -65,7 +65,7 @@
                 <Font size="33.0" />
             </font>
         </Label>
-        <Label contentDisplay="CENTER" layoutY="194.0" prefHeight="34.0" prefWidth="67.0" text="   S">
+        <Label contentDisplay="CENTER" layoutY="420.0" prefHeight="34.0" prefWidth="67.0" text="   S">
             <font>
                 <Font size="33.0" />
             </font>
@@ -75,12 +75,12 @@
                 <Font size="33.0" />
             </font>
         </Label>
-        <Label contentDisplay="CENTER" layoutY="352.0" prefHeight="34.0" prefWidth="67.0" text="   J">
+        <Label contentDisplay="CENTER" layoutY="279.0" prefHeight="34.0" prefWidth="67.0" text="   J">
             <font>
                 <Font size="33.0" />
             </font>
         </Label>
-        <Label contentDisplay="CENTER" layoutY="425.0" prefHeight="34.0" prefWidth="67.0" text="  O">
+        <Label contentDisplay="CENTER" layoutX="18.0" layoutY="494.0" prefHeight="49.0" prefWidth="41.0" text=" O">
             <font>
                 <Font size="33.0" />
             </font>
@@ -88,27 +88,58 @@
         <TextField fx:id="textL" layoutX="58.0" layoutY="29.0" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: grey;" text="0">
             <font>
                 <Font size="28.0" />
-            </font></TextField>
-        <TextField fx:id="textO" layoutX="58.0" layoutY="425.0" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: grey;" text="0">
+            </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></TextField>
+        <TextField fx:id="textO" layoutX="58.0" layoutY="489.0" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: grey;" text="0">
             <font>
                 <Font size="28.0" />
-            </font></TextField>
-        <TextField fx:id="textJ" layoutX="58.0" layoutY="347.0" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: grey;" text="0">
+            </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></TextField>
+        <TextField fx:id="textJ" layoutX="58.0" layoutY="267.0" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: grey;" text="0">
             <font>
                 <Font size="28.0" />
-            </font></TextField>
-        <TextField fx:id="textT" layoutX="58.0" layoutY="270.0" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: grey;" text="0">
+            </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></TextField>
+        <TextField fx:id="textT" layoutX="58.0" layoutY="341.0" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: grey;" text="0">
             <font>
                 <Font size="28.0" />
-            </font></TextField>
-        <TextField fx:id="textS" layoutX="58.0" layoutY="189.0" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: grey;" text="0">
+            </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></TextField>
+        <TextField fx:id="textS" layoutX="58.0" layoutY="415.0" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: grey;" text="0">
             <font>
                 <Font size="28.0" />
-            </font></TextField>
+            </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></TextField>
         <TextField fx:id="textZ" layoutX="58.0" layoutY="107.0" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: grey;" text="0">
             <font>
                 <Font size="28.0" />
-            </font></TextField>
+            </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></TextField>
+      <TextField fx:id="textI" layoutX="58.0" layoutY="190.0" prefHeight="36.0" prefWidth="49.0" style="-fx-background-color: grey;" text="0">
+         <font>
+            <Font size="28.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </TextField>
+      <Label contentDisplay="CENTER" layoutX="10.0" layoutY="195.0" prefHeight="49.0" prefWidth="41.0" text="  I">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
     </children>
     <opaqueInsets>
         <Insets />

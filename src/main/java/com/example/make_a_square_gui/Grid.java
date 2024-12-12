@@ -1,3 +1,4 @@
+package com.example.make_a_square_gui;
 public class Grid {
     
     private int[][] grid;
@@ -5,6 +6,7 @@ public class Grid {
     public Grid() {
         grid = new int[constants.gridRows][constants.gridCols];
     }
+    Controller controller = new Controller();
 
     public boolean canPlacePiece(Piece piece, int x, int y) {
         int[][] pieceShape = piece.getPiece();
@@ -41,12 +43,25 @@ public class Grid {
     }
 
     public void printGrid() {
+        int[][] temp = new int[4][4];
         for (int i = 0; i < constants.gridRows; i++) {
             for (int j = 0; j < constants.gridCols; j++) {
                 System.out.print(grid[i][j] + " ");
+                temp[i][j] = grid[i][j];
             }
             System.out.println();
         }
+        printGridGui();
+    }
+
+    public int[][] printGridGui() {
+        int[][] temp = new int[4][4];
+        for (int i = 0; i < constants.gridRows; i++) {
+            for (int j = 0; j < constants.gridCols; j++) {
+                temp[i][j] = grid[i][j];
+            }
+        }
+        return temp;
     }
 
     public boolean isFull() {

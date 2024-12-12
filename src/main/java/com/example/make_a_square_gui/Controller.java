@@ -1,5 +1,6 @@
 package com.example.make_a_square_gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -20,21 +21,20 @@ public class Controller implements Initializable {
             button3x0, button3x1, button3x2, button3x3;
     //=================================================//
     @FXML
-    private TextField textT,textL,textS,textZ,textJ,textO;
+    private TextField textT,textL,textS,textZ,textJ,textO,textI;
     //======================//
     @FXML
     private Button solveButton;
     //=========================//
 
-    private HashMap<Character, Integer> hashMap = new HashMap<>();
+    private HashMap<Integer, Integer> hashMap = new HashMap<>();
     private Button[][] array2DButton = new Button[4][4];
     private ArrayList<Button> buttonArrayList;
     private int[][] finalBoard;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        solveButton.setOnAction(event -> solveProblem());
         initButtons();
+        solveButton.setOnAction(event -> solveProblem());
     }
 
     void initButtons() {
@@ -65,12 +65,14 @@ public class Controller implements Initializable {
     }
 
     private void setHashMap() {
-        hashMap.put('T', parseInteger(textT));
-        hashMap.put('L', parseInteger(textL));
-        hashMap.put('S', parseInteger(textS));
-        hashMap.put('O', parseInteger(textO));
-        hashMap.put('Z', parseInteger(textZ));
-        hashMap.put('J', parseInteger(textJ));
+
+        hashMap.put(0, parseInteger(textL));
+        hashMap.put(1, parseInteger(textZ));
+        hashMap.put(2, parseInteger(textI));
+        hashMap.put(3, parseInteger(textJ));
+        hashMap.put(4, parseInteger(textT));
+        hashMap.put(5, parseInteger(textS));
+        hashMap.put(6, parseInteger(textO));
     }
 
     private int parseInteger(TextField text) {
@@ -79,53 +81,125 @@ public class Controller implements Initializable {
 
     private void solveProblem() {
         setHashMap();
+        Grid grid = new Grid();
         PiecesModel piecesModel = new PiecesModel();
-        Map<Integer, int[][]> pieces = new HashMap<>();
+        Piece[] pieces = piecesModel.getAllPieces();
+        int valuesSum = 0;
 
-        // Map pieces
-        hashMap.forEach((key, value) -> {
-            int[][] basePiece = piecesModel.retrievePiece(key);
-            for (int i = 0; i < value; i++) {
-                pieces.put(pieces.size(), basePiece);
-            }
-        });
-
-        int numberOfThreads = 10;
-        int sectionSize = 10000 / numberOfThreads;
-        Thread[] threads = new Thread[numberOfThreads];
-
-        for (int i = 0; i < numberOfThreads; i++) {
-            threads[i] = new Thread(new Paralleling(pieces, i, sectionSize), String.valueOf(i));
-            threads[i].start();
-        }
-
-        // Join threads
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        for (int value : hashMap.values()) {
+            if (value != 0) {
+                valuesSum += value;
             }
         }
 
-        // Update GUI
-        if (Paralleling.foundBoard) {
-            updateGUI(Paralleling.finallyBoard);
-        } else {
-            System.out.println("No solution found!");
+        System.out.println("Total sum of non-zero values: " + valuesSum);
+
+        Piece[] selectedPieces = new Piece[valuesSum];
+        int counter = 0;
+        int[] valuesArray = new int[valuesSum];
+        int index = 0;
+
+        for (Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
+            int value = entry.getKey();
+            int occurrences = entry.getValue();
+
+            for (int i = 0; i < occurrences; i++) {
+                valuesArray[index++] = value;
+            }
+        }
+        for (int i = 0; i < valuesSum; i++) {
+            selectedPieces[i] = pieces[valuesArray[i]];
+            System.out.println(selectedPieces[i]);
+        }
+        SolverThread solverThread = new SolverThread(grid, selectedPieces, 0);
+        solverThread.start();
+        try {
+            solverThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(solverThread.getMessage());
+        if (solverThread.isSolutionFound()) {
+            System.out.println("Final grid state:");
+            int[][] temp = grid.printGridGui();
+            updateGUI(temp);
         }
     }
 
 
-    private void updateGUI(int[][] solvedBoard) {
+    public void updateGUI(int[][] solvedBoard) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                String buttonText = solvedBoard[i][j] == 0 ? "" : String.valueOf(solvedBoard[i][j]);
+                String buttonText = String.valueOf(solvedBoard[i][j]);
+                System.out.println(array2DButton[i][j].getText());
                 array2DButton[i][j].setText(buttonText);
-                array2DButton[i][j].setStyle(solvedBoard[i][j] == 0 ? "-fx-background-color: white;" : "-fx-background-color: lightgreen;");
+
+                switch (solvedBoard[i][j]) {
+                    case 1:
+                        array2DButton[i][j].setStyle("-fx-background-color: red;");
+                        break;
+                    case 2:
+                        array2DButton[i][j].setStyle("-fx-background-color: green;");
+                        break;
+                    case 3:
+                        array2DButton[i][j].setStyle("-fx-background-color: blue;");
+                        break;
+                    case 4:
+                        array2DButton[i][j].setStyle("-fx-background-color: yellow;");
+                        break;
+                    case 5:
+                        array2DButton[i][j].setStyle("-fx-background-color: purple;");
+                        break;
+                    default:
+                        array2DButton[i][j].setStyle("-fx-background-color: white;");
+                }
             }
         }
     }
 
+    public void clearGUI(int[][] solvedBoard){
 
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    array2DButton[i][j].setText(" ");
+                    array2DButton[i][j].setStyle("-fx-background-color: white;");
+                }
+            }
+
+    }
 }
+//        // Map pieces
+//        hashMap.forEach((key, value) -> {
+//            int[][] basePiece = piecesModel.retrievePiece(key);
+//            for (int i = 0; i < value; i++) {
+//                pieces.put(pieces.size(), basePiece);
+//            }
+//        });
+//
+//        int numberOfThreads = 10;
+//        int sectionSize = 10000 / numberOfThreads;
+//        Thread[] threads = new Thread[numberOfThreads];
+//
+//        for (int i = 0; i < numberOfThreads; i++) {
+//            threads[i] = new Thread(new Paralleling(pieces, i, sectionSize), String.valueOf(i));
+//            threads[i].start();
+//        }
+//
+//        // Join threads
+//        for (Thread thread : threads) {
+//            try {
+//                thread.join();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        // Update GUI
+//        if (Paralleling.foundBoard) {
+//            updateGUI(Paralleling.finallyBoard);
+//        } else {
+//            System.out.println("No solution found!");
+//        }
+//    }
+//
+//

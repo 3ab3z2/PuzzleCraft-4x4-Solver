@@ -1,4 +1,4 @@
-// package com.example.make_a_square_gui;
+ package com.example.make_a_square_gui;
 
 public class PiecesModel {
     private int[][][] pieces;

@@ -1,3 +1,4 @@
+package com.example.make_a_square_gui;
 public class SolverThread extends Thread {
     
     private Grid grid;
@@ -51,14 +52,16 @@ public class SolverThread extends Thread {
                 for (int j = 0; j < 4; j++) {
                     if (grid.canPlacePiece(currentPiece, i, j)) {
                         grid.placePiece(currentPiece, i, j, index + 1);
+
                         grid.printGrid();
-                        System.out.println(); 
+                        System.out.println();
 
                         if (solve(grid, pieces, index + 1)) {
                             return true;
                         }
 
                         grid.removePiece(currentPiece, i, j);
+
                     }
                 }
             }
@@ -66,6 +69,7 @@ public class SolverThread extends Thread {
 
         return false;
     }
+
 
     public boolean isSolutionFound() {
         return solutionFound;

@@ -67,17 +67,19 @@ public class Board {
 
     public int[][] decompose(int mask) {
         int[][] copyGrid = new int[sizeX][sizeY];
-        setGrid(copyGrid);
 
         for (int i = 0; i < 4; i++) {
-            int pieceIndex = (mask >> (i * 4)) & 15;
+            int pieceIndex = (mask >> (i * 4)) & 15; // Extract 4 bits for each piece
             int[][] piece = pieces.get(pieceIndex);
 
-            Piece pieceObject = new Piece(piece);
+            if (piece == null) continue; // If no piece matches, skip
+
             for (int rotation = 0; rotation < 4; rotation++) {
-                int[][] rotatedPiece = pieceObject.rotate();
+                int[][] rotatedPiece = rotatePiece(piece, rotation);
+
                 for (boolean flip : new boolean[]{false, true}) {
-                    int[][] currentPiece = flip ? new Piece(rotatedPiece).flip() : rotatedPiece;
+                    int[][] currentPiece = flip ? flipPiece(rotatedPiece) : rotatedPiece;
+
                     for (int row = 0; row < sizeX; row++) {
                         for (int col = 0; col < sizeY; col++) {
                             if (canPlacePiece(copyGrid, currentPiece, row, col)) {
@@ -92,11 +94,39 @@ public class Board {
                 }
             }
         }
-        return null;
+        return null; // Return null if no valid placement found
     }
 
+    private int[][] rotatePiece(int[][] piece, int rotation) {
+        int rows = piece.length;
+        int cols = piece[0].length;
+        int[][] rotated = new int[cols][rows];
 
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                switch (rotation) {
+                    case 1 -> rotated[j][rows - 1 - i] = piece[i][j]; // 90 degrees
+                    case 2 -> rotated[rows - 1 - i][cols - 1 - j] = piece[i][j]; // 180 degrees
+                    case 3 -> rotated[cols - 1 - j][i] = piece[i][j]; // 270 degrees
+                    default -> rotated[i][j] = piece[i][j]; // 0 degrees
+                }
+            }
+        }
+        return rotated;
+    }
 
+    private int[][] flipPiece(int[][] piece) {
+        int rows = piece.length;
+        int cols = piece[0].length;
+        int[][] flipped = new int[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                flipped[i][cols - 1 - j] = piece[i][j];
+            }
+        }
+        return flipped;
+    }
 
     @Override
     public String toString() {
