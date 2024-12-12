@@ -1,4 +1,4 @@
-package com.example.make_a_square_gui;
+// package com.example.make_a_square_gui;
 
 public class PiecesModel {
     private int[][][] pieces;
@@ -30,5 +30,17 @@ public class PiecesModel {
             case 'O': return 6;
             default: return -1;
         }
+    }
+    
+    public Piece[] getAllPieces() {
+        return new Piece[]{
+            new Piece(new int[][]{{1, 0}, {1, 0}, {1, 1}}), // L piece
+            new Piece(new int[][]{{1, 1, 0}, {0, 1, 1}}), // Z piece
+            new Piece(new int[][]{{1, 1, 1, 1}}),      // I piece
+            new Piece(new int[][]{{0, 1}, {0, 1}, {1, 1}}), // J piece
+            new Piece(new int[][]{{1, 1, 1}, {0, 1, 0}}), // T piece
+            new Piece(new int[][]{{0, 1, 1}, {1, 1, 0}}), // S piece
+            new Piece(new int[][]{{1, 1}, {1, 1}}),     // O piece
+        };
     }
 }

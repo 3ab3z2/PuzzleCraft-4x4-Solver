@@ -1,4 +1,4 @@
-package com.example.make_a_square_gui;
+// package com.example.make_a_square_gui;
 
 public class Piece {
     private int[][] piece;
@@ -11,15 +11,26 @@ public class Piece {
         this.col = piece[0].length;
     }
 
-    public int[][] rotate() {
+    // public int[][] rotate() {
+    //     int[][] rotated = new int[col][row];
+    //     for (int i = 0; i < row; i++) {
+    //         for (int j = 0; j < col; j++) {
+    //             rotated[j][row - 1 - i] = piece[i][j];
+    //         }
+    //     }
+    //     return rotated;
+    // }
+
+    public Piece rotate() {
         int[][] rotated = new int[col][row];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 rotated[j][row - 1 - i] = piece[i][j];
             }
         }
-        return rotated;
+        return new Piece(rotated);
     }
+    
 
     public int[][] flip() {
         int[][] flipped = new int[row][col];
@@ -35,6 +46,18 @@ public class Piece {
         return piece;
     }
 
+    public int getNumberOfSquares() {
+        int count = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (piece[i][j] != 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }    
+
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder();
@@ -45,5 +68,14 @@ public class Piece {
             ret.append('\n');
         }
         return ret.toString();
+    }
+
+    public void print() {
+        for (int[] row : piece) {
+            for (int cell : row) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
+        }
     }
 }
