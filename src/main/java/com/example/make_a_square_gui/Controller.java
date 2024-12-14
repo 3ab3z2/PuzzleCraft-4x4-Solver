@@ -1,10 +1,10 @@
 package com.example.make_a_square_gui;
 
 import javafx.application.Platform;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -26,7 +26,9 @@ public class Controller implements Initializable {
     @FXML
     private Button solveButton;
 
-    private HashMap<Integer, Integer> hashMap = new HashMap<>();
+    @FXML
+    private Label messageLabel;
+
     private HashMap<Integer, Integer> hashMap = new HashMap<>();
     private Button[][] array2DButton = new Button[4][4];
     private ArrayList<Button> buttonArrayList;
@@ -81,16 +83,9 @@ public class Controller implements Initializable {
     private void solveProblemWithUpdates() {
         setHashMap();
         Grid grid = new Grid();
-        Grid grid = new Grid();
         PiecesModel piecesModel = new PiecesModel();
         Piece[] pieces = piecesModel.getAllPieces();
-        int valuesSum = 0;
-
-        for (int value : hashMap.values()) {
-            if (value != 0) {
-                valuesSum += value;
-            }
-        }
+        int valuesSum = hashMap.values().stream().mapToInt(value -> value).filter(value -> value != 0).sum();
 
         Piece[] selectedPieces = new Piece[valuesSum];
         int counter = 0;
@@ -110,17 +105,27 @@ public class Controller implements Initializable {
             selectedPieces[i] = pieces[valuesArray[i]];
         }
 
-        Thread solverThread = new Thread(() -> {
-            boolean solved = solveWithUpdates(grid, selectedPieces, 0);
-            if (solved) {
-                Platform.runLater(() -> updateGUI(grid.getGridState()));
-                System.out.println("Solution found!");
-            } else {
-                Platform.runLater(() -> System.out.println("No solution found!"));
-            }
-        });
+        if (valuesSum == 4) {
+            Thread solverThread = new Thread(() -> {
+                boolean solved = solveWithUpdates(grid, selectedPieces, 0);
+                if (solved) {
+                    Platform.runLater(() -> {
+                        updateGUI(grid.getGridState());
+                        messageLabel.setText("");
+                    });
+                } else {
+                    Platform.runLater(() -> {
+                        messageLabel.setText("No solution found!");
+                        messageLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+                    });
+                }
+            });
 
-        solverThread.start();
+            solverThread.start();
+        } else {
+            messageLabel.setText("Invalid input: Exactly 4 pieces are required.");
+            messageLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+        }
     }
 
     private boolean solveWithUpdates(Grid grid, Piece[] pieces, int index) {
@@ -140,7 +145,7 @@ public class Controller implements Initializable {
                         Platform.runLater(() -> updateGUI(grid.getGridState()));
 
                         try {
-                            Thread.sleep(500); // Delay for visualization
+                            Thread.sleep(50); // Delay for visualization
                         } catch (InterruptedException e) {
                             Thread.currentThread().interrupt();
                         }
