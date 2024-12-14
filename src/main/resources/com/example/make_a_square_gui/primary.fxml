@@ -23,6 +23,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
+        
         <GridPane gridLinesVisible="true" layoutX="182.0" layoutY="29.0" opacity="0.6" prefHeight="535.0" prefWidth="560.0" style="-fx-background-color: grey;">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="140.0" />
