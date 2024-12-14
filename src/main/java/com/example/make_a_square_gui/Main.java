@@ -1,3 +1,5 @@
+package com.example.make_a_square_gui;
+
 import java.util.Scanner;
 
 public class Main {

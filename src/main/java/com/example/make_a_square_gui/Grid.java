@@ -42,6 +42,14 @@ public class Grid {
         }
     }
 
+    public int[][] getGridState() {
+        int[][] copy = new int[constants.gridRows][constants.gridCols];
+        for (int i = 0; i < constants.gridRows; i++) {
+            System.arraycopy(grid[i], 0, copy[i], 0, constants.gridCols);
+        }
+        return copy;
+    }
+
     public void printGrid() {
         int[][] temp = new int[4][4];
         for (int i = 0; i < constants.gridRows; i++) {

@@ -15,5 +15,5 @@
         "lib/**/*.jar",
         "/usr/lib/jvm/java-23-openjdk/lib/*.jar"
     ],
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

@@ -53,8 +53,14 @@ public class SolverThread extends Thread {
                     if (grid.canPlacePiece(currentPiece, i, j)) {
                         grid.placePiece(currentPiece, i, j, index + 1);
 
+                        // Print the grid and pause for 3 seconds
                         grid.printGrid();
                         System.out.println();
+                        try {
+                            Thread.sleep(3000); // Pause for 3 seconds
+                        } catch (InterruptedException e) {
+                            System.err.println("Thread interrupted during sleep: " + e.getMessage());
+                        }
 
                         if (solve(grid, pieces, index + 1)) {
                             return true;
