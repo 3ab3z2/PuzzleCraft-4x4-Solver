@@ -12,6 +12,30 @@ Make A Square Game is a puzzle game inspired by Tetris, where the objective is t
 ## Project Structure
 ```
 Make_A_Square_Game
+├── .classpath
+├── .gitignore
+├── .idea
+│   ├── .gitignore
+│   ├── compiler.xml
+│   ├── jarRepositories.xml
+│   ├── misc.xml
+│   ├── vcs.xml
+│   └── workspace.xml
+├── .project
+├── .settings
+│   ├── org.eclipse.jdt.apt.core.prefs
+│   ├── org.eclipse.jdt.core.prefs
+│   └── org.eclipse.m2e.core.prefs
+├── .vscode
+│   ├── launch.json
+│   ├── settings.json
+│   └── tasks.json
+├── docs
+│   ├── INSTALLATION.md
+│   └── USAGE.md
+├── LICENSE
+├── pom.xml
+├── README.md
 ├── src
 │   ├── main
 │   │   ├── java
@@ -19,27 +43,29 @@ Make_A_Square_Game
 │   │   │       └── example
 │   │   │           └── make_a_square_gui
 │   │   │               ├── Board.java
-│   │   │               ├── HelloController.java
-│   │   │               ├── MakeASquare.java
+│   │   │               ├── Controller.java
+│   │   │               ├── Grid.java
+│   │   │               ├── Main.java
 │   │   │               ├── Paralleling.java
 │   │   │               ├── Piece.java
 │   │   │               ├── PiecesModel.java
+│   │   │               ├── SolverThread.java
 │   │   │               └── constants.java
 │   │   └── resources
 │   │       └── com
 │   │           └── example
 │   │               └── make_a_square_gui
-│   │                   └── hello-view.fxml
-├── .vscode
-│   ├── launch.json
-│   ├── settings.json
-│   └── tasks.json
-├── .gitignore
-├── pom.xml
-├── README.md
-└── docs
-    ├── INSTALLATION.md
-    └── USAGE.md
+│   │                   └── primary.fxml
+│   └── test
+│       └── java
+└── target
+    ├── classes
+    │   └── com
+    ├── generated-sources
+    │   └── annotations
+    ├── maven-status
+    │   └── maven-compiler-plugin
+    └── test-classes
 ```
 
 ## Installation

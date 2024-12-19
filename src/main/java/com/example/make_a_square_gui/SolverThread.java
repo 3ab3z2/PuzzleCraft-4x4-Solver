@@ -56,7 +56,7 @@ public class SolverThread extends Thread {
                     sharedSolutionFound = true;
                 }
             } finally {
-                lock.unlock();
+                3
             }
         } else {
             message = "No solution found by thread " + threadId;
